@@ -1,0 +1,1557 @@
+look <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="description" content="Fluxy – Premium supima cotton t-shirts. Ethically made, built to last.">
+<title>Fluxy – Wear the flow</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+<!-- EmailJS Library -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<!-- Paystack -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#0f0f0f;--white:#fff;--off:#F7F6F3;
+  --gray:#888;--accent:#2563EB;--accent-light:#EFF4FF;
+  --red:#EF4444;--green:#10B981;--border:#E5E7EB;
+  --yellow:#FCD116;--orange:#F59E0B;--whatsapp:#25D366;
+  --font:'Inter',-apple-system,sans-serif;
+}
+body{font-family:var(--font);color:var(--black);background:var(--white);line-height:1.5;font-size:16px;min-height:100vh}
+a{text-decoration:none;color:inherit;cursor:pointer}
+img{max-width:100%;display:block}
+.container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+
+/* NAV */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.5rem;border-bottom:1px solid rgba(0,0,0,.07);background:rgba(255,255,255,.96);backdrop-filter:blur(12px);position:sticky;top:0;z-index:50;max-width:100%}
+.logo{font-size:1.25rem;font-weight:800;letter-spacing:-.03em;cursor:pointer}
+.logo em{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray);transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:var(--black)}
+.cart-btn{background:var(--black);color:#fff;border:none;padding:.55rem 1.1rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;border-radius:2px;display:flex;align-items:center;gap:.45rem;transition:background .2s}
+.cart-btn:hover{background:var(--accent)}
+.cart-badge{background:var(--accent);color:#fff;font-size:.65rem;font-weight:800;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.wishlist-badge{background:var(--red);color:#fff;font-size:.65rem;font-weight:800;min-width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+/* COUNTRY BADGE */
+.country-badge{display:flex;align-items:center;gap:.4rem;background:var(--off);padding:.35rem .75rem;border-radius:2px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+
+/* PAGES */
+.page{display:none;min-height:80vh}
+.page.active{display:block}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;min-height:78vh;align-items:center;gap:0}
+.hero-copy{padding:4rem 3rem 4rem 1.5rem;max-width:520px}
+.hero-eyebrow{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:1.2rem}
+.hero-copy h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:800;line-height:1.08;letter-spacing:-.04em;margin-bottom:1.25rem}
+.hero-copy p{font-size:1.05rem;color:var(--gray);margin-bottom:2rem;line-height:1.65}
+.hero-img{background:#E8E5DF;height:100%;min-height:70vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-img-placeholder{width:100%;height:100%;min-height:70vh;background:linear-gradient(135deg,#E8E5DF 0%,#D5D0C8 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;color:#999;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em}
+.hero-img-placeholder svg{opacity:.35}
+.hero-tag{position:absolute;bottom:1rem;left:2rem;background:#fff;padding:.65rem 0.5rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-left:0.2px solid var(--accent)}
+
+/* FLASH SALE BANNER */
+.flash-banner{background:linear-gradient(135deg,var(--red),#DC2626);color:#fff;padding:.75rem 1.5rem;text-align:center;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.flash-banner .countdown{background:rgba(255,255,255,.2);padding:.3rem .8rem;border-radius:4px;font-weight:800;font-size:.9rem;letter-spacing:.05em}
+.flash-banner button{background:#fff;color:var(--red);border:none;padding:.4rem 1rem;font-weight:700;border-radius:4px;cursor:pointer;font-size:.8rem;font-family:var(--font)}
+
+/* GHANA NOTICE */
+.ghana-notice{background:#FEF3C7;border:1px solid #F59E0B;padding:.75rem 1rem;border-radius:4px;font-size:.8rem;color:#92400E;display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem}
+.ghana-notice svg{flex-shrink:0}
+
+/* BUTTONS */
+.btn{display:inline-block;padding:.8rem 2rem;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;border:none;cursor:pointer;transition:all .2s;border-radius:2px;font-family:var(--font)}
+.btn-dark{background:var(--black);color:#fff}
+.btn-dark:hover{background:var(--accent)}
+.btn-outline{background:transparent;color:var(--black);border:1.5px solid var(--black)}
+.btn-outline:hover{background:var(--black);color:#fff}
+.btn-accent{background:var(--accent);color:#fff}
+.btn-accent:hover{background:#1d4ed8}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:#059669}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* LOADING SPINNER */
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;margin-right:.5rem}
+.spinner-dark{border:2px solid rgba(0,0,0,.1);border-top-color:var(--accent)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* SECTION HEADERS */
+.section-head{text-align:center;padding:4rem 0 2.5rem}
+.section-head h2{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.6rem}
+.section-head p{color:var(--gray);font-size:.95rem;max-width:480px;margin:0 auto}
+
+/* PRODUCTS */
+.products-section{background:var(--off);padding:0 0 5rem}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;padding:0 1.5rem}
+.product-card{background:#fff;overflow:hidden;transition:transform .25s,box-shadow .25s;cursor:pointer;position:relative}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.08)}
+.wishlist-btn{position:absolute;top:.75rem;right:.75rem;width:36px;height:36px;background:#fff;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.1);z-index:2;transition:all .2s}
+.wishlist-btn:hover{transform:scale(1.1)}
+.wishlist-btn.wished{color:var(--red)}
+.product-img{aspect-ratio:3/4;overflow:hidden;position:relative}
+.product-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:#bbb}
+.product-info{padding:1.1rem 1.1rem 1.3rem}
+.product-info h3{font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem}
+.product-color{font-size:.78rem;color:var(--gray);margin-bottom:.6rem}
+.product-price{font-size:1rem;font-weight:700;margin-bottom:.25rem}
+.product-price-ghs{font-size:.8rem;color:var(--gray);margin-bottom:.6rem}
+.size-row{display:flex;gap:.4rem;margin-bottom:.6rem;flex-wrap:wrap}
+.size-btn{padding:.3rem .6rem;border:1px solid #ddd;background:#fff;font-size:.72rem;font-weight:600;cursor:pointer;border-radius:2px;transition:all .15s;font-family:var(--font)}
+.size-btn:hover,.size-btn.sel{border-color:var(--black);background:var(--black);color:#fff}
+.size-guide-link{display:inline-block;font-size:.7rem;color:var(--accent);cursor:pointer;text-decoration:underline;margin-bottom:.8rem}
+.add-btn{width:100%;padding:.75rem;background:var(--black);color:#fff;border:none;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;cursor:pointer;transition:background .2s;font-family:var(--font);border-radius:2px}
+.add-btn:hover{background:var(--accent)}
+.added-flash{background:var(--accent) !important}
+
+/* PRODUCT GALLERY (SIMPLIFIED) */
+.product-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.5rem}
+.gallery-thumb{aspect-ratio:1;background:var(--off);cursor:pointer;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:#bbb;transition:all .2s}
+.gallery-thumb:hover,.gallery-thumb.active{border:2px solid var(--accent)}
+
+/* REVIEWS */
+.reviews-section{padding:3rem 0;background:#fff}
+.review-card{background:var(--off);padding:1.5rem;border-radius:8px;margin-bottom:1rem}
+.review-header{display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem}
+.review-avatar{width:40px;height:40px;background:var(--accent-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:.8rem}
+.review-name{font-weight:700;font-size:.85rem}
+.review-date{font-size:.75rem;color:var(--gray)}
+.review-stars{color:#F59E0B;font-size:.9rem}
+.review-text{font-size:.85rem;color:var(--gray);line-height:1.6}
+.review-form{margin-top:2rem;background:var(--off);padding:2rem;border-radius:8px}
+.star-rating{display:flex;gap:.25rem;margin-bottom:1rem}
+.star-rating button{background:none;border:none;font-size:1.5rem;cursor:pointer;color:#ddd;transition:color .15s}
+.star-rating button.active,.star-rating button:hover{color:#F59E0B}
+
+/* FEATURES */
+.features{padding:5rem 0;background:#fff}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2.5rem;padding:0 1.5rem}
+.feature-item{text-align:center;padding:2rem 1.5rem}
+.feature-icon{width:44px;height:44px;background:var(--accent-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:var(--accent)}
+.feature-item h4{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.feature-item p{font-size:.82rem;color:var(--gray);line-height:1.6}
+
+/* CTA BAND */
+.cta-band{background:var(--black);color:#fff;padding:5rem 1.5rem;text-align:center}
+.cta-band h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.75rem}
+.cta-band p{color:rgba(255,255,255,.55);font-size:.95rem;margin-bottom:2rem}
+
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;align-items:center}
+.about-copy{padding:4rem 3rem 4rem 1.5rem}
+.about-copy h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:1.25rem}
+.about-copy p{color:var(--gray);font-size:1rem;line-height:1.7;margin-bottom:1.1rem;max-width:460px}
+.about-img{background:var(--off);height:100%;min-height:70vh;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em}
+.about-stats{display:flex;gap:2.5rem;margin-top:2rem;padding-top:2rem;border-top:1px solid #eee}
+.about-stat h3{font-size:2rem;font-weight:800;letter-spacing:-.03em;color:var(--accent)}
+.about-stat p{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);margin-top:.2rem}
+
+/* CONTACT */
+.contact-wrap{max-width:680px;margin:0 auto;padding:5rem 1.5rem}
+.contact-wrap h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.6rem}
+.contact-wrap > p{color:var(--gray);margin-bottom:2.5rem}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.45rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:.75rem;border:1.5px solid #ddd;font-size:.95rem;font-family:var(--font);outline:none;border-radius:2px;transition:border-color .2s;background:#fff;color:var(--black)}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent)}
+.form-group textarea{resize:vertical;min-height:130px}
+.form-group .error-message{color:var(--red);font-size:.75rem;margin-top:.25rem;display:none}
+.form-group.error input,.form-group.error textarea,.form-group.error select{border-color:var(--red)}
+.form-group.error .error-message{display:block}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+/* MOBILE MONEY SECTION */
+.momo-section{background:#fff;border:2px solid var(--border);border-radius:8px;padding:1.5rem;margin:1.5rem 0}
+.momo-section h4{font-size:.85rem;font-weight:700;margin-bottom:.5rem}
+.momo-section p{font-size:.8rem;color:var(--gray);margin-bottom:1rem}
+.momo-providers{display:flex;gap:.75rem;margin-bottom:1.25rem}
+.momo-provider{flex:1;border:2px solid var(--border);padding:.75rem;text-align:center;cursor:pointer;border-radius:6px;transition:all .2s;background:#fff}
+.momo-provider:hover{border-color:var(--accent)}
+.momo-provider.selected{border-color:var(--accent);background:var(--accent-light)}
+.momo-provider-logo{font-size:1.5rem;margin-bottom:.25rem}
+.momo-provider-name{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+
+/* PAYMENT SECURE BADGE */
+.secure-badge{display:flex;align-items:center;gap:.5rem;justify-content:center;padding:.75rem;background:#F0FDF4;border-radius:6px;margin:1rem 0;font-size:.8rem;color:#065F46}
+.secure-badge svg{flex-shrink:0}
+
+/* DELIVERY OPTIONS */
+.delivery-options{display:grid;gap:1rem;margin:1.5rem 0}
+.delivery-option{border:2px solid var(--border);padding:1.25rem;cursor:pointer;border-radius:4px;transition:all .2s;display:flex;align-items:center;gap:1rem}
+.delivery-option:hover{border-color:var(--accent)}
+.delivery-option.selected{border-color:var(--accent);background:var(--accent-light)}
+.delivery-radio{width:20px;height:20px;border:2px solid var(--border);border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.delivery-option.selected .delivery-radio{border-color:var(--accent)}
+.delivery-option.selected .delivery-radio::after{content:'';width:10px;height:10px;background:var(--accent);border-radius:50%}
+.delivery-info{flex:1}
+.delivery-name{font-weight:700;font-size:.9rem}
+.delivery-desc{font-size:.8rem;color:var(--gray)}
+.delivery-price{font-weight:700;font-size:.9rem}
+
+/* CHECKOUT PAGE */
+.checkout-container{max-width:1000px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.checkout-steps{display:flex;justify-content:center;gap:2rem;margin-bottom:3rem;position:relative}
+.checkout-steps::after{content:'';position:absolute;top:15px;left:50%;transform:translateX(-50%);width:60%;height:2px;background:var(--border);z-index:0}
+.checkout-step{display:flex;flex-direction:column;align-items:center;gap:.5rem;position:relative;z-index:1;background:#fff;padding:0 1rem}
+.step-number{width:32px;height:32px;border-radius:50%;background:var(--border);color:#999;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;transition:all .3s}
+.step-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:#999;transition:all .3s}
+.checkout-step.active .step-number{background:var(--accent);color:#fff}
+.checkout-step.active .step-label{color:var(--black)}
+.checkout-step.completed .step-number{background:var(--green);color:#fff}
+
+.checkout-content{max-width:700px;margin:0 auto}
+.checkout-section{display:none}
+.checkout-section.active{display:block}
+.checkout-section h2{font-size:1.5rem;font-weight:700;margin-bottom:2rem}
+
+/* ORDER SUMMARY */
+.order-summary{background:var(--off);padding:1.5rem;border-radius:4px;margin:2rem 0}
+.order-summary h3{font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem}
+.summary-item{display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.summary-item:last-child{border-bottom:none}
+.summary-item-name{font-weight:600}
+.summary-item-detail{color:var(--gray);font-size:.8rem}
+.summary-total{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;margin-top:1rem;border-top:2px solid var(--black);font-weight:800;font-size:1.1rem}
+
+/* COUPON */
+.coupon-section{display:flex;gap:.5rem;margin:1.5rem 0}
+.coupon-input{flex:1;padding:.7rem;border:1.5px solid var(--border);font-family:var(--font);font-size:.9rem;border-radius:2px}
+.coupon-input:focus{border-color:var(--accent);outline:none}
+.coupon-apply{padding:.7rem 1.5rem;background:var(--black);color:#fff;border:none;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;border-radius:2px;font-family:var(--font)}
+.coupon-apply:hover{background:var(--accent)}
+.coupon-applied{display:flex;align-items:center;gap:.5rem;padding:.5rem;background:#F0FDF4;border:1px solid #86EFAC;border-radius:4px;margin:1rem 0;font-size:.85rem}
+.coupon-applied .remove-coupon{margin-left:auto;background:none;border:none;color:var(--red);cursor:pointer;font-weight:700}
+
+/* PROCESSING OVERLAY */
+.processing-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:flex;align-items:center;justify-content:center}
+.processing-box{background:#fff;border-radius:12px;padding:2.5rem;text-align:center;max-width:400px;width:90%}
+.processing-box h3{font-size:1.1rem;font-weight:800;margin:1rem 0 .5rem}
+.processing-box p{font-size:.85rem;color:var(--gray)}
+.processing-spinner{width:48px;height:48px;border:4px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto}
+
+/* CONFIRMATION */
+.confirmation{text-align:center;padding:4rem 1.5rem}
+.confirmation svg{margin-bottom:1.5rem}
+.confirmation h2{font-size:2rem;font-weight:800;margin-bottom:1rem}
+.confirmation p{color:var(--gray);font-size:1.1rem;margin-bottom:1rem;max-width:500px;margin-left:auto;margin-right:auto}
+.confirmation-details{background:var(--off);padding:2rem;border-radius:4px;margin:2rem auto;max-width:500px;text-align:left}
+.confirmation-details h3{font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem}
+.conf-row{display:flex;justify-content:space-between;padding:.5rem 0;font-size:.9rem}
+.conf-row strong{font-weight:600}
+
+/* CART SIDEBAR */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:90;opacity:0;pointer-events:none;transition:opacity .25s}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-sidebar{position:fixed;right:0;top:0;bottom:0;width:420px;background:#fff;z-index:95;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;overflow:hidden;max-width:100vw}
+.cart-sidebar.open{transform:none}
+.cart-header{display:flex;justify-content:space-between;align-items:center;padding:1.5rem;border-bottom:1px solid #eee}
+.cart-header h2{font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.close-btn{background:none;border:none;cursor:pointer;font-size:1.3rem;color:var(--gray);line-height:1}
+.cart-items{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;color:var(--gray);gap:.5rem;font-size:.9rem}
+.cart-item{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid #f0f0f0;align-items:flex-start}
+.cart-item-img{width:70px;height:85px;background:var(--off);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.6rem;color:#bbb;text-transform:uppercase;border-radius:2px}
+.cart-item-info{flex:1}
+.cart-item-info h4{font-size:.85rem;font-weight:700;margin-bottom:.2rem}
+.cart-item-meta{font-size:.75rem;color:var(--gray);margin-bottom:.5rem}
+.cart-item-price{font-size:.9rem;font-weight:700}
+.qty-row{display:flex;align-items:center;gap:.5rem;margin-top:.5rem}
+.qty-btn{width:26px;height:26px;border:1px solid #ddd;background:#fff;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;border-radius:2px;font-family:var(--font)}
+.qty-btn:hover{border-color:var(--black)}
+.qty-num{font-size:.85rem;font-weight:600;min-width:20px;text-align:center}
+.remove-btn{margin-left:auto;background:none;border:none;cursor:pointer;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#aaa;font-family:var(--font)}
+.remove-btn:hover{color:var(--red)}
+.cart-footer{padding:1.5rem;border-top:1px solid #eee}
+.cart-total-row{display:flex;justify-content:space-between;font-size:.85rem;color:var(--gray);margin-bottom:.4rem}
+.cart-discount-row{display:flex;justify-content:space-between;font-size:.85rem;color:var(--green);margin-bottom:.4rem}
+.cart-total{display:flex;justify-content:space-between;font-weight:800;font-size:1rem;margin-bottom:1.5rem}
+.checkout-btn{width:100%;padding:.9rem;background:var(--accent);color:#fff;border:none;font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;cursor:pointer;border-radius:2px;font-family:var(--font);transition:background .2s}
+.checkout-btn:hover{background:#1d4ed8}
+.continue-shopping{display:block;text-align:center;margin-top:.75rem;font-size:.8rem;color:var(--gray);cursor:pointer}
+.continue-shopping:hover{color:var(--black)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:150;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:#fff;border-radius:12px;padding:2.5rem;max-width:500px;width:90%;max-height:80vh;overflow-y:auto}
+.modal-box h2{font-size:1.3rem;font-weight:800;margin-bottom:1.5rem}
+.modal-close{float:right;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--gray)}
+
+/* SIZE GUIDE */
+.size-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.size-table th,.size-table td{padding:.75rem;text-align:center;border-bottom:1px solid var(--border)}
+.size-table th{background:var(--off);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+
+/* SOCIAL PROOF */
+.social-proof{position:fixed;bottom:100px;left:20px;background:#fff;border-radius:12px;padding:.75rem 1rem;box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:80;font-size:.8rem;display:flex;align-items:center;gap:.75rem;animation:slideIn .3s ease;max-width:300px}
+.social-proof-close{position:absolute;top:-8px;right:-8px;width:22px;height:22px;background:#000;color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:.7rem;display:flex;align-items:center;justify-content:center}
+@keyframes slideIn{from{transform:translateX(-100%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* FLOATING WHATSAPP */
+.float-whatsapp{position:fixed;bottom:20px;right:20px;background:var(--whatsapp);color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.2);cursor:pointer;transition:transform .2s;font-size:1.5rem}
+.float-whatsapp:hover{transform:scale(1.1)}
+
+/* INSTAGRAM FEED */
+.insta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;padding:2rem 0}
+.insta-item{aspect-ratio:1;background:var(--off);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#bbb;cursor:pointer;transition:opacity .2s}
+.insta-item:hover{opacity:.7}
+
+/* TRACKING */
+.track-timeline{position:relative;padding-left:2rem;margin:2rem 0}
+.track-timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--border)}
+.track-step{position:relative;margin-bottom:2rem}
+.track-step::before{content:'';position:absolute;left:-1.8rem;top:.3rem;width:12px;height:12px;border-radius:50%;background:var(--border)}
+.track-step.done::before{background:var(--green)}
+.track-step.active::before{background:var(--accent);box-shadow:0 0 0 4px var(--accent-light)}
+.track-step h4{font-size:.85rem;font-weight:700;margin-bottom:.2rem}
+.track-step p{font-size:.8rem;color:var(--gray)}
+.track-step .track-date{font-size:.7rem;color:#aaa}
+
+/* FOOTER */
+footer{border-top:1px solid #eee;padding:2.5rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gray);cursor:pointer}
+.footer-links a:hover{color:var(--black)}
+.footer-copy{font-size:.75rem;color:#bbb}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--black);color:#fff;padding:.75rem 1.5rem;font-size:.82rem;font-weight:600;border-radius:2px;z-index:250;opacity:0;transition:all .3s;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.toast.error{background:var(--red)}
+.toast.success{background:var(--green)}
+
+@media(max-width:700px){
+  .hero,.about-wrap{grid-template-columns:1fr}
+  .hero-img,.about-img{min-height:240px;display:none}
+  .nav-links{display:none}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .footer{flex-direction:column;text-align:center}
+  .form-row{grid-template-columns:1fr}
+  .checkout-steps{gap:1rem}
+  .checkout-step{padding:0 .5rem}
+  .cart-sidebar{width:100%}
+  .momo-providers{flex-direction:column}
+  .insta-grid{grid-template-columns:repeat(2,1fr)}
+  .social-proof{bottom:80px;left:10px;right:10px;max-width:none}
+}
+@media(max-width:420px){
+  .product-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- FLASH SALE BANNER -->
+<div class="flash-banner" id="flash-banner">
+  <span>⚡ FLASH SALE: 20% off all orders!</span>
+  <span>Ends in: <span class="countdown" id="countdown">02:30:00</span></span>
+  <button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Shop Now</button>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="logo" onclick="showPage('home')">Fluxy<em>.</em></a>
+  <div class="country-badge">
+    <svg width="16" height="12" viewBox="0 0 16 12"><rect width="16" height="4" fill="#CE1126"/><rect y="4" width="16" height="4" fill="#FCD116"/><rect y="8" width="16" height="4" fill="#006B3F"/><polygon points="8,0 9.5,4.5 14,4.5 10.5,7.5 12,12 8,9 4,12 5.5,7.5 2,4.5 6.5,4.5" fill="#000"/></svg>
+    Ghana
+  </div>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')">Home</a></li>
+    <li><a onclick="showPage('home');setTimeout(()=>document.getElementById('shop').scrollIntoView({behavior:'smooth'}),80)">Shop</a></li>
+    <li><a onclick="showPage('track')">Track Order</a></li>
+    <li><a onclick="showPage('about')">About</a></li>
+    <li><a onclick="showPage('contact')">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:.75rem;align-items:center">
+    <button onclick="showPage('wishlist')" style="background:none;border:none;cursor:pointer;font-size:1.3rem;position:relative" aria-label="Wishlist">
+      ❤️
+      <span class="wishlist-badge" id="wishlist-count" style="position:absolute;top:-6px;right:-8px">0</span>
+    </button>
+    <button class="cart-btn" onclick="toggleCart()" aria-label="Open cart">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Cart
+      <span class="cart-badge" id="cart-count">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-copy container" style="padding-left:max(1.5rem,calc((100vw - 1100px)/2 + 1.5rem))">
+      <div class="hero-eyebrow">Proudly made in Ghana 🇬🇭</div>
+      <h1>Wear<br>the<br>flow.</h1>
+      <p>Premium 220g supima cotton. Made in a GOTS-certified factory right here in Ghana. Built to last a decade.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <button class="btn btn-dark" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Shop now</button>
+        <button class="btn btn-outline" onclick="showPage('about')">Our story</button>
+      </div>
+    </div>
+    <div class="hero-img">
+      <div class="hero-img-placeholder">
+        <img src="FLUXY LOGO - Copy.png" alt="">
+      </div>
+      <div class="hero-tag">🇬🇭 Free delivery in Accra</div>
+    </div>
+  </div>
+
+  <!-- REVIEWS SECTION -->
+  <section class="reviews-section container" style="padding:3rem 1.5rem">
+    <div class="section-head" style="padding-bottom:2rem"><h2>What our customers say</h2></div>
+    <div id="reviews-container"></div>
+    
+    <!-- Add Review Form -->
+    <div class="review-form" id="review-form">
+      <h3 style="font-size:.95rem;font-weight:700;margin-bottom:1rem">Leave a Review</h3>
+      <div class="star-rating" id="star-rating">
+        <button onclick="setReviewRating(1)">★</button>
+        <button onclick="setReviewRating(2)">★</button>
+        <button onclick="setReviewRating(3)">★</button>
+        <button onclick="setReviewRating(4)">★</button>
+        <button onclick="setReviewRating(5)">★</button>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Name</label><input type="text" id="review-name" placeholder="Your name"></div>
+        <div class="form-group"><label>Email (won't be shown)</label><input type="email" id="review-email" placeholder="your@email.com"></div>
+      </div>
+      <div class="form-group"><label>Your Review</label><textarea id="review-text" placeholder="Share your experience..." rows="3"></textarea></div>
+      <button class="btn btn-dark" onclick="submitReview()">Submit Review</button>
+    </div>
+  </section>
+
+  <section id="shop" style="padding-top:0">
+    <div class="products-section">
+      <div class="section-head container">
+        <h2>Fluxy collection</h2>
+        <p>Three colors, one perfect cut. Available for delivery across Ghana.</p>
+      </div>
+      <div class="product-grid container" id="product-grid"></div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="section-head container" style="padding-bottom:2rem"><h2>Why Fluxy</h2></div>
+    <div class="feature-grid container">
+      <div class="feature-item">
+        <div class="feature-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>Made in Ghana</h4><p>GOTS-certified factory. We know every person who makes our shirts.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 14.14 14.14"/></svg></div>
+        <h4>220g Supima</h4><p>Heavier than fast fashion, perfect for Ghana's climate.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h4>Nationwide delivery</h4><p>Fast delivery to Accra, Kumasi, and all 16 regions.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h4>Secure MoMo Pay</h4><p>Pay instantly with MTN, Vodafone, or AirtelTigo via Paystack.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM FEED SECTION -->
+  <section style="padding:4rem 1.5rem;background:var(--off)">
+    <div class="section-head container" style="padding-bottom:1.5rem">
+      <h2>Follow @officialfluxy</h2>
+      <p>Tag us to be featured</p>
+    </div>
+    <div class="insta-grid container" style="max-width:800px">
+      <div class="insta-item" onclick="showToast('Follow @fluxyghana on Instagram! 📸')"><img src="Naruto Basketball White 01.png" alt=""></div>
+      <div class="insta-item" onclick="showToast('Follow @fluxyghana on Instagram! 📸')"><img src="Naruto Basketball White 01.png" alt=""></div>
+      <div class="insta-item" onclick="showToast('Follow @fluxyghana on Instagram! 📸')"><img src="Naruto Basketball White 01.png" alt=""></div>
+      <div class="insta-item" onclick="showToast('Follow @fluxyghana on Instagram! 📸')"><img src="Naruto Basketball White 01.png" alt=""></div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container" style="max-width:600px">
+      <h2>Join the movement.</h2>
+      <p>Early access to new drops and restocks — for our Ghana community.</p>
+      <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;max-width:420px;margin:0 auto">
+        <input type="email" placeholder="your@email.com" style="flex:1;padding:.75rem 1rem;border:none;font-size:.9rem;font-family:'Inter',sans-serif;border-radius:2px;min-width:180px" id="subscribe-email">
+        <button class="btn btn-accent" style="white-space:nowrap" onclick="handleSubscribe()">Subscribe</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ABOUT PAGE -->
+<div class="page" id="page-about">
+  <div class="about-wrap">
+    <div class="about-copy container">
+      <div class="hero-eyebrow">Founded 2025 · Ghana 🇬🇭</div>
+      <h1>Built in Ghana,<br>for the world.</h1>
+      <p>Fluxy was born in Accra with a simple belief: the best t-shirt should come from the best people. Our GOTS-certified factory employs 50+ skilled Ghanaian artisans.</p>
+      <p>No venture funding. No shortcuts. Just pure craftsmanship from the heart of West Africa.</p>
+      <a onclick="showPage('home');setTimeout(()=>document.getElementById('shop').scrollIntoView({behavior:'smooth'}),80)" class="btn btn-dark" style="margin-top:.5rem;cursor:pointer">Shop the collection</a>
+      <div class="about-stats">
+        <div class="about-stat"><h3>50+</h3><p>Ghanaian artisans</p></div>
+        <div class="about-stat"><h3>GOTS</h3><p>Certified</p></div>
+        <div class="about-stat"><h3>16</h3><p>Regions served</p></div>
+      </div>
+    </div>
+    <div class="about-img"><img src="hero_img.png" alt=""></div>
+  </div>
+</div>
+
+<!-- TRACK ORDER PAGE -->
+<div class="page" id="page-track">
+  <div class="contact-wrap">
+    <h1>Track Your Order</h1>
+    <p>Enter your order number and email to see your delivery status.</p>
+    <div class="form-group">
+      <label>Order Number *</label>
+      <input type="text" id="track-number" placeholder="e.g., FLX-GH-XXXXX">
+    </div>
+    <div class="form-group">
+      <label>Email Address *</label>
+      <input type="email" id="track-email" placeholder="Order email address">
+    </div>
+    <button class="btn btn-dark" onclick="trackOrder()" style="width:100%">Track Order</button>
+    <div id="track-result" style="margin-top:2rem"></div>
+  </div>
+</div>
+
+<!-- WISHLIST PAGE -->
+<div class="page" id="page-wishlist">
+  <div class="contact-wrap">
+    <h1>My Wishlist ❤️</h1>
+    <p>Items you've saved for later.</p>
+    <div id="wishlist-items"></div>
+    <div id="wishlist-empty" style="text-align:center;padding:3rem;color:var(--gray);display:none">
+      <svg width="48" height="48" fill="none" stroke="#ccc" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <p style="margin-top:1rem">Your wishlist is empty</p>
+      <button class="btn btn-dark" onclick="showPage('home')" style="margin-top:1rem">Browse Products</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT PAGE -->
+<div class="page" id="page-contact">
+  <div class="contact-wrap">
+    <h1>Never miss a drop.</h1>
+    <p style="color:#888;margin-bottom:2.5rem">Questions, feedback, or wholesale inquiries from anywhere in Ghana.</p>
+    <form id="contact-form" onsubmit="handleContactSubmit(event)">
+      <div class="form-group"><label>Name</label><input type="text" name="contact_name" placeholder="Your name" required/></div>
+      <div class="form-group"><label>Email</label><input type="email" name="contact_email" placeholder="officialfluxy149@gmail.com" required/></div>
+      <div class="form-group"><label>Phone (Ghana)</label><input type="tel" name="contact_phone" placeholder="+233 54 748 4348"/></div>
+      <div class="form-group"><label>Subject</label><input type="text" name="contact_subject" placeholder="Order question, sizing, feedback…"/></div>
+      <div class="form-group"><label>Message</label><textarea name="contact_message" placeholder="What's on your mind?" required></textarea></div>
+      <button type="submit" class="btn btn-dark" id="contact-submit-btn">Send message</button>
+    </form>
+    <p style="margin-top:1.5rem;font-size:.8rem;color:#aaa">Or WhatsApp us: <a href="https://wa.me/233000000000" style="color:var(--accent)">+233 XX XXX XXXX</a> | Email: <a href="mailto:officialfluxy149@gmail.com" style="color:var(--accent)">officialfluxy149@gmail.com</a></p>
+  </div>
+</div>
+
+<!-- CHECKOUT PAGE -->
+<div class="page" id="page-checkout">
+  <div class="checkout-container">
+    <div class="ghana-notice">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>We currently only ship within <strong>Ghana</strong>. Delivery available to all 16 regions.</span>
+    </div>
+
+    <div class="checkout-steps">
+      <div class="checkout-step active" id="step-indicator-1"><div class="step-number">1</div><div class="step-label">Delivery</div></div>
+      <div class="checkout-step" id="step-indicator-2"><div class="step-number">2</div><div class="step-label">Payment</div></div>
+      <div class="checkout-step" id="step-indicator-3"><div class="step-number">3</div><div class="step-label">Confirm</div></div>
+    </div>
+
+    <div class="checkout-content">
+      <!-- Step 1: Delivery -->
+      <div class="checkout-section active" id="checkout-step-1">
+        <h2>Delivery Information</h2>
+        <form id="shipping-form" novalidate>
+          <div class="form-row">
+            <div class="form-group"><label for="firstName">First Name *</label><input type="text" id="firstName" required placeholder="Kwame"><div class="error-message">First name is required</div></div>
+            <div class="form-group"><label for="lastName">Last Name *</label><input type="text" id="lastName" required placeholder="Mensah"><div class="error-message">Last name is required</div></div>
+          </div>
+          <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" required placeholder="kwame@example.com"><div class="error-message">Valid email is required</div></div>
+          <div class="form-group"><label for="phone">Phone Number (Ghana) *</label><input type="tel" id="phone" required placeholder="+233 24 123 4567"><div class="error-message">Ghana phone number is required</div></div>
+          <div class="form-group"><label for="region">Region *</label>
+            <select id="region" required onchange="updateDeliveryFee()">
+              <option value="">Select your region</option>
+              <option value="Greater Accra">Greater Accra</option><option value="Ashanti">Ashanti</option>
+              <option value="Western">Western</option><option value="Central">Central</option>
+              <option value="Eastern">Eastern</option><option value="Volta">Volta</option>
+              <option value="Northern">Northern</option><option value="Upper East">Upper East</option>
+              <option value="Upper West">Upper West</option><option value="Bono">Bono</option>
+              <option value="Bono East">Bono East</option><option value="Ahafo">Ahafo</option>
+              <option value="Western North">Western North</option><option value="Oti">Oti</option>
+              <option value="Savannah">Savannah</option><option value="North East">North East</option>
+            </select><div class="error-message">Region is required</div></div>
+          <div class="form-row">
+            <div class="form-group"><label for="city">Town/City *</label><input type="text" id="city" required placeholder="Accra, Kumasi, Tamale..."><div class="error-message">Town/City is required</div></div>
+            <div class="form-group"><label for="district">District</label><input type="text" id="district" placeholder="Your district"></div>
+          </div>
+          <div class="form-group"><label for="address">Street Address / Landmark *</label><input type="text" id="address" required placeholder="House number, street name, landmark"><div class="error-message">Address is required</div></div>
+          <div class="form-group"><label for="gps">GPS Address (Optional)</label><input type="text" id="gps" placeholder="e.g., GA-123-4567"></div>
+
+          <h3 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1rem;margin-top:1.5rem">Delivery Method</h3>
+          <div class="delivery-options">
+            <div class="delivery-option selected" onclick="selectDelivery(this, 'standard')"><div class="delivery-radio"></div><div class="delivery-info"><div class="delivery-name">Standard Delivery</div><div class="delivery-desc">3-5 business days via courier</div></div><div class="delivery-price" id="standard-price">₵25</div></div>
+            <div class="delivery-option" onclick="selectDelivery(this, 'express')"><div class="delivery-radio"></div><div class="delivery-info"><div class="delivery-name">Express Delivery</div><div class="delivery-desc">1-2 business days (Accra/Kumasi only)</div></div><div class="delivery-price" id="express-price">₵45</div></div>
+            <div class="delivery-option" onclick="selectDelivery(this, 'pickup')"><div class="delivery-radio"></div><div class="delivery-info"><div class="delivery-name">Pickup (Accra)</div><div class="delivery-desc">Collect from our Osu studio</div></div><div class="delivery-price">FREE</div></div>
+          </div>
+          <button type="button" class="btn btn-dark" onclick="goToStep(2)" style="width:100%;margin-top:1rem">Continue to Payment</button>
+        </form>
+      </div>
+
+      <!-- Step 2: Payment -->
+      <div class="checkout-section" id="checkout-step-2">
+        <h2>Payment Method</h2>
+        
+        <div class="momo-section">
+          <h4>💳 Pay securely with Paystack</h4>
+          <p>You will be redirected to FLUXY's official Paystack payment page to complete your payment using the payment methods available there.</p>
+          <div class="secure-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Secure checkout powered by Paystack
+          </div>
+        </div>
+
+        <div style="display:flex;gap:1rem;margin-top:1.5rem">
+          <button type="button" class="btn btn-outline" onclick="goToStep(1)" style="flex:1">Back</button>
+          <button type="button" class="btn btn-dark" onclick="goToStep(3)" style="flex:1">Review Order</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Review & Pay -->
+      <div class="checkout-section" id="checkout-step-3">
+        <h2>Review & Pay</h2>
+        
+        <div class="order-summary">
+          <h3>Order Summary</h3>
+          <div id="review-items"></div>
+          <div class="summary-item"><span>Subtotal</span><span id="review-subtotal">₵0.00</span></div>
+          <div class="summary-item" id="review-shipping-row"><span>Delivery</span><span id="review-shipping">₵0.00</span></div>
+          <div class="summary-item" id="review-discount-row" style="display:none;color:var(--green)"><span>Discount</span><span id="review-discount">-₵0.00</span></div>
+          <div class="summary-total"><span>Total to Pay</span><span id="review-total">₵0.00</span></div>
+        </div>
+
+        <div style="background:var(--off);padding:1.5rem;border-radius:4px;margin:1.5rem 0">
+          <h3 style="font-size:.85rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">Delivery Address</h3>
+          <div id="review-address" style="font-size:.9rem;line-height:1.6"></div>
+        </div>
+
+        <button type="button" class="btn btn-accent" onclick="payWithPaystack()" id="place-order-btn" style="width:100%;margin-top:1rem;padding:1rem;font-size:1rem"><a href="https://paystack.shop/pay/fluxy-payments">
+          🔒 Pay Now with Paystack
+        </button></a>
+        <button type="button" class="btn btn-outline" onclick="goToStep(2)" style="width:100%;margin-top:.75rem">← Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SIZE GUIDE MODAL -->
+<div class="modal-overlay" id="size-guide-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('size-guide-modal')">✕</button>
+    <h2>📏 Size Guide</h2>
+    <table class="size-table">
+      <thead><tr><th>Size</th><th>Chest (in)</th><th>Length (in)</th><th>Sleeve (in)</th></tr></thead>
+      <tbody>
+        <tr><td>XS</td><td>34-36</td><td>27</td><td>8</td></tr>
+        <tr><td>S</td><td>36-38</td><td>28</td><td>8.5</td></tr>
+        <tr><td>M</td><td>38-40</td><td>29</td><td>9</td></tr>
+        <tr><td>L</td><td>40-42</td><td>30</td><td>9.5</td></tr>
+        <tr><td>XL</td><td>42-44</td><td>31</td><td>10</td></tr>
+        <tr><td>2XL</td><td>44-46</td><td>32</td><td>10.5</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.8rem;color:var(--gray);margin-top:1rem">Model is 5'11" and wears size M. Our shirts have a regular fit — order your usual size.</p>
+  </div>
+</div>
+
+<!-- PROCESSING OVERLAY -->
+<div class="processing-overlay" id="processing-overlay" style="display:none">
+  <div class="processing-box">
+    <div class="processing-spinner"></div>
+    <h3>Processing Payment</h3>
+    <p>Please wait while we verify your payment...</p>
+  </div>
+</div>
+
+<!-- ORDER CONFIRMATION PAGE -->
+<div class="page" id="page-confirmation">
+  <div class="confirmation">
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <h2>Payment Successful! 🇬🇭</h2>
+    <p>Thank you for your order. A confirmation email has been sent.</p>
+    <div class="confirmation-details" id="confirmation-details"></div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem">
+      <button class="btn btn-dark" onclick="showPage('home')">Continue Shopping</button>
+      <button class="btn btn-outline" onclick="window.print()">Print Confirmation</button>
+      <button class="btn btn-accent" onclick="document.getElementById('track-number').value='';document.getElementById('track-email').value='';showPage('track')">Track Order</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a onclick="showPage('about')">About</a>
+    <a onclick="showPage('contact')">Contact</a>
+    <a onclick="showPage('track')">Track Order</a>
+    <a href="#" onclick="showToast('Free delivery in Accra. Nationwide delivery available.');return false;">Delivery</a>
+    <a href="#" onclick="showToast('Free returns within 30 days in Ghana.');return false;">Returns</a>
+    <a href="#" onclick="showToast('We never share your data. Read our full privacy policy.');return false;">Privacy</a>
+  </div>
+  <div class="footer-copy">© 2025 Fluxy Ghana. Made in Accra 🇬🇭</div>
+</footer>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/233547484348" class="float-whatsapp" target="_blank" aria-label="Chat on WhatsApp" title="Chat with us on WhatsApp">
+  💬
+</a>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header"><h2>Your cart</h2><button class="close-btn" onclick="toggleCart()" aria-label="Close cart">✕</button></div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="coupon-section"><input type="text" class="coupon-input" id="coupon-input" placeholder="Coupon code"><button class="coupon-apply" onclick="applyCoupon()">Apply</button></div>
+    <div id="coupon-message"></div>
+    <div class="cart-total-row"><span>Subtotal</span><span id="cart-subtotal">₵0.00</span></div>
+    <div class="cart-discount-row" id="cart-discount-row" style="display:none"><span>Discount (<span id="coupon-code-display"></span>)</span><span id="cart-discount">-₵0.00</span></div>
+    <div class="cart-total-row"><span>Delivery</span><span id="cart-shipping">Select at checkout</span></div>
+    <div class="cart-total"><span>Total</span><span id="cart-total-val">₵0.00</span></div>
+    <button class="checkout-btn" onclick="goToCheckout()">Proceed to checkout</button>
+    <span class="continue-shopping" onclick="toggleCart()">← Continue shopping</span>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============ CONFIGURATION ============
+const PAYSTACK_PUBLIC_KEY = ''; // Hosted checkout initializes securely on the server.
+const BUSINESS_NAME = 'Fluxy Ghana';
+const WHATSAPP_NUMBER = '233000000000'; // Change to your number
+
+// ============ EMAILJS CONFIGURATION ============
+(function() {
+  emailjs.init("apvNrNOburBrMy_Hn");
+})();
+
+// ============ DATA ============
+const products = [
+  {
+    id: 'black',
+    name: 'Original Base T-Shirt',
+    color: 'Black',
+    price: 250,
+    bg: '#1a1a1a',
+    fg: '#555',
+    images: [
+      'img.jpg',
+    ],
+    alt: 'Fluxy Base T-Shirt Black - Premium 220g Supima Cotton',
+    description: 'Classic black essential tee. Perfect for everyday wear.'
+  },
+  {
+    id: 'white',
+    name: 'Original Base T-Shirt',
+    color: 'White',
+    price: 250,
+    bg: '#F0EDE8',
+    fg: '#999',
+    images: [
+      'img1.jpg',
+    ],
+    alt: 'Fluxy Base T-Shirt White - Premium 220g Supima Cotton',
+    description: 'Clean white essential tee. Versatile and timeless.'
+  },
+  {
+    id: 'naruto_black',
+    name: 'Fluxy Naruto White T-Shirt',
+    color: 'Navy',
+    price: 250,
+    bg: '#1E2E4A',
+    fg: '#3a4f70',
+    images: [
+      'Naruto Basketball Black 03.png',
+      'Naruto Black Minimalist T-Shirt Mockup.png',
+      'Naruto Basketball Black 02.png'
+    ],
+    alt: 'Fluxy Base T-Shirt Navy - Premium 220g Supima Cotton',
+    description: 'Deep navy essential tee. Rich color that lasts.'
+  },
+    {
+    id: 'naruto_white',
+    name: 'Fluxy Naruto White T-Shirt',
+    color: 'Navy',
+    price: 250,
+    bg: '#1E2E4A',
+    fg: '#3a4f70',
+    images: [
+      'Naruto Basketball White 02.png',
+      'White Minimalist T-Shirt Mockup.png',
+      'Naruto Basketball White 03.png'
+    ],
+    alt: 'Fluxy Essential T-Shirt Navy - Premium 220g Supima Cotton',
+    description: 'Deep navy essential tee. Rich color that lasts.'
+  },
+];
+
+const sizes=['XS','S','M','L','XL','2XL'];
+
+// Reviews data
+const initialReviews = [
+  {name:'Kwame A.',rating:5,text:'Best t-shirt I\'ve ever owned! The quality is unmatched. Perfect for Accra weather.',date:'2025-07-15'},
+  {name:'Akua M.',rating:5,text:'Perfect fit and so comfortable. The 220g cotton feels premium and durable.',date:'2025-07-10'},
+  {name:'Yaw S.',rating:4,text:'Great quality shirt. Shipping to Kumasi was faster than expected!',date:'2025-06-28'},
+];
+
+// Social proof messages
+const socialProofMessages = [
+  'Someone in Accra just bought 2 shirts! 🎉',
+  'Kwame from Kumasi ordered Navy XL 🛍️',
+  'Akua in Tema just purchased Black M ⚡',
+  'Yaw from Tamale ordered White L 👕',
+  'Popular! Black Essential T just sold again 🔥',
+  'Someone just saved 15% with ACCRA15 💰',
+];
+
+const deliveryFees = {
+  'Greater Accra': { standard: 25, express: 45 },
+  'Ashanti': { standard: 35, express: 55 },
+  'Central': { standard: 30, express: 50 },
+  'Western': { standard: 35, express: 55 },
+  'Eastern': { standard: 30, express: 50 },
+  'Volta': { standard: 35, express: 55 },
+  'Northern': { standard: 45, express: null },
+  'Upper East': { standard: 50, express: null },
+  'Upper West': { standard: 50, express: null },
+  'Bono': { standard: 40, express: null },
+  'Bono East': { standard: 40, express: null },
+  'Ahafo': { standard: 40, express: null },
+  'Western North': { standard: 40, express: null },
+  'Oti': { standard: 40, express: null },
+  'Savannah': { standard: 50, express: null },
+  'North East': { standard: 50, express: null },
+};
+
+const coupons = {
+  'FLOW10': { type: 'percent', value: 10, description: '10% off' },
+  'ACCRA15': { type: 'percent', value: 15, description: '15% off (Accra only)' },
+  'FLAT50': { type: 'fixed', value: 50, description: '₵50 off' },
+};
+
+// ============ STATE ============
+let cart = JSON.parse(localStorage.getItem('fluxy-cart') || '[]');
+let selectedSizes = JSON.parse(localStorage.getItem('fluxy-sizes') || '{}');
+let appliedCoupon = JSON.parse(localStorage.getItem('fluxy-coupon') || 'null');
+let wishlist = JSON.parse(localStorage.getItem('fluxy-wishlist') || '[]');
+let reviews = JSON.parse(localStorage.getItem('fluxy-reviews') || JSON.stringify(initialReviews));
+reviews = typeof reviews === 'string' ? JSON.parse(reviews) : reviews;
+let currentStep = 1;
+let momoProvider = 'mtn';
+let deliveryMethod = 'standard';
+let reviewRating = 0;
+
+// ============ FLASH SALE COUNTDOWN ============
+function startFlashSale() {
+  // Set sale end time: 24 hours from now
+  const endTime = new Date();
+  endTime.setHours(endTime.getHours() + 24);
+  
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = endTime.getTime() - now;
+    
+    if (distance < 0) {
+      document.getElementById('countdown').textContent = 'SALE ENDED';
+      document.getElementById('flash-banner').style.background = 'linear-gradient(135deg, #666, #888)';
+      clearInterval(window.flashInterval);
+      return;
+    }
+    
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    document.getElementById('countdown').textContent = 
+      `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+  }
+  
+  updateCountdown();
+  window.flashInterval = setInterval(updateCountdown, 1000);
+}
+
+// ============ SOCIAL PROOF ============
+function showSocialProof() {
+  const messages = socialProofMessages;
+  let index = 0;
+  
+  function showNext() {
+    const el = document.getElementById('social-proof');
+    document.getElementById('social-proof-text').textContent = messages[index];
+    document.getElementById('social-proof-time').textContent = 'Just now';
+    el.style.display = 'flex';
+    
+    // Update time
+    let seconds = 0;
+    const timeInterval = setInterval(() => {
+      seconds++;
+      if (seconds < 60) {
+        document.getElementById('social-proof-time').textContent = `${seconds}s ago`;
+      } else {
+        document.getElementById('social-proof-time').textContent = `${Math.floor(seconds/60)}m ago`;
+      }
+    }, 1000);
+    
+    setTimeout(() => {
+      el.style.display = 'none';
+      clearInterval(timeInterval);
+      index = (index + 1) % messages.length;
+    }, 5000);
+  }
+  
+  showNext();
+  setInterval(showNext, 30000); // Show every 30 seconds
+}
+
+function renderProducts(){
+  const grid = document.getElementById('product-grid');
+  if(!grid) return;
+  
+  grid.innerHTML = products.map(p => `
+  <div class="product-card">
+    <button class="wishlist-btn ${wishlist.includes(p.id)?'wished':''}" 
+            onclick="toggleWishlist('${p.id}');event.stopPropagation();" 
+            aria-label="Add to wishlist">
+      ${wishlist.includes(p.id)?'❤️':'🤍'}
+    </button>
+    
+    <div class="product-img" id="main-img-${p.id}">
+      <img src="${p.images[0]}" 
+           alt="${p.alt}" 
+           style="width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;"
+           loading="lazy"
+           onerror="handleImageError(this, '${p.bg}', '${p.fg}', '${p.color}')">
+    </div>
+    
+    <div class="product-info">
+      <h3>${p.name}</h3>
+      <div class="product-color">${p.color}</div>
+      <div class="product-price">₵${p.price}.00</div>
+      <div class="product-price-ghs">~24 USD</div>
+      
+      <!-- Product Gallery Thumbnails -->
+      <div class="product-gallery">
+        ${p.images.map((img, i) => `
+          <div class="gallery-thumb ${i === 0 ? 'active' : ''}" 
+               onclick="switchProductImage('${p.id}', '${img}', this);event.stopPropagation();"
+               style="background-image:url('${img}');background-size:cover;background-position:center;"
+               title="View ${i === 0 ? 'Front' : i === 1 ? 'Back' : 'Detail'}">
+          </div>
+        `).join('')}
+      </div>
+      
+      <div class="size-row" id="sizes-${p.id}">
+        ${sizes.map(s => `<button class="size-btn ${selectedSizes[p.id] === s ? 'sel' : ''}" 
+              onclick="selectSize('${p.id}','${s}',this)">${s}</button>`).join('')}
+      </div>
+      
+      <div class="size-guide-link" onclick="showSizeGuide();event.stopPropagation()">
+        📏 View Size Guide
+      </div>
+      
+      <button class="add-btn" id="add-${p.id}" onclick="addToCart('${p.id}')">
+        Add to cart
+      </button>
+    </div>
+  </div>`).join('');
+}
+
+// Image switching function for gallery thumbnails
+function switchProductImage(productId, imageUrl, thumbElement) {
+  const mainImg = document.querySelector(`#main-img-${productId} img`);
+  if(mainImg) {
+    mainImg.style.opacity = '0';
+    setTimeout(() => {
+      mainImg.src = imageUrl;
+      mainImg.style.opacity = '1';
+    }, 150);
+  }
+  
+  // Update active thumbnail
+  const thumbs = thumbElement.parentElement.querySelectorAll('.gallery-thumb');
+  thumbs.forEach(t => t.classList.remove('active'));
+  thumbElement.classList.add('active');
+}
+
+// Fallback handler if image fails to load
+function handleImageError(imgElement, bgColor, fgColor, colorName) {
+  imgElement.style.display = 'none';
+  const placeholder = document.createElement('div');
+  placeholder.className = 'product-img-placeholder';
+  placeholder.style.cssText = `
+    width:100%;height:100%;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:.75rem;color:${fgColor};background:${bgColor};
+    font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;
+  `;
+  placeholder.innerHTML = `
+    <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+      <path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/>
+    </svg>
+    ${colorName}
+  `;
+  imgElement.parentElement.appendChild(placeholder);
+}
+function showSizeGuide() {
+  document.getElementById('size-guide-modal').classList.add('open');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+// Close modal on overlay click
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('modal-overlay')) {
+    e.target.classList.remove('open');
+  }
+});
+
+function selectSize(pid,size,el){
+  selectedSizes[pid]=size;
+  localStorage.setItem('fluxy-sizes', JSON.stringify(selectedSizes));
+  document.querySelectorAll(`#sizes-${pid} .size-btn`).forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+// ============ WISHLIST ============
+function toggleWishlist(productId) {
+  if(wishlist.includes(productId)) {
+    wishlist = wishlist.filter(id => id !== productId);
+    showToast('Removed from wishlist');
+  } else {
+    wishlist.push(productId);
+    showToast('Added to wishlist ❤️','success');
+  }
+  localStorage.setItem('fluxy-wishlist', JSON.stringify(wishlist));
+  updateWishlistUI();
+  renderProducts();
+}
+
+function updateWishlistUI() {
+  const count = wishlist.length;
+  const badge = document.getElementById('wishlist-count');
+  if(badge) badge.textContent = count;
+  
+  // Update wishlist page if visible
+  const container = document.getElementById('wishlist-items');
+  const empty = document.getElementById('wishlist-empty');
+  if(!container || !empty) return;
+  
+  if(wishlist.length === 0) {
+    container.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  
+  empty.style.display = 'none';
+  const wishlistProducts = products.filter(p => wishlist.includes(p.id));
+  container.innerHTML = wishlistProducts.map(p => `
+    <div style="display:flex;gap:1.5rem;align-items:center;padding:1.5rem;border-bottom:1px solid var(--border);margin-bottom:1rem;background:var(--off);border-radius:8px">
+      <div style="width:100px;height:120px;background:${p.bg};display:flex;align-items:center;justify-content:center;color:${p.fg};font-size:.7rem;border-radius:4px;flex-shrink:0">
+        ${p.color}
+      </div>
+      <div style="flex:1">
+        <h4 style="font-weight:700;margin-bottom:.25rem">${p.name} - ${p.color}</h4>
+        <div style="color:var(--accent);font-weight:700;margin-bottom:.5rem">₵${p.price}.00</div>
+        <div style="display:flex;gap:.75rem">
+          <button class="btn btn-dark" style="font-size:.75rem;padding:.5rem 1rem" onclick="selectSize('${p.id}','M',document.querySelector('#sizes-${p.id} .size-btn:nth-child(3)'));addToCart('${p.id}')">Add to Cart</button>
+          <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem" onclick="toggleWishlist('${p.id}')">Remove</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============ REVIEWS ============
+function renderReviews() {
+  const container = document.getElementById('reviews-container');
+  if(!container) return;
+  
+  container.innerHTML = reviews.map(r => `
+    <div class="review-card">
+      <div class="review-header">
+        <div class="review-avatar">${r.name.charAt(0)}</div>
+        <div>
+          <div class="review-name">${r.name}</div>
+          <div class="review-date">${new Date(r.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+        </div>
+        <div class="review-stars" style="margin-left:auto">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div>
+      </div>
+      <p class="review-text">"${r.text}"</p>
+    </div>
+  `).join('');
+}
+
+function setReviewRating(rating) {
+  reviewRating = rating;
+  const buttons = document.querySelectorAll('#star-rating button');
+  buttons.forEach((btn, i) => {
+    btn.classList.toggle('active', i < rating);
+  });
+}
+
+function submitReview() {
+  const name = document.getElementById('review-name').value.trim();
+  const email = document.getElementById('review-email').value.trim();
+  const text = document.getElementById('review-text').value.trim();
+  
+  if(!name || !email || !text || reviewRating === 0) {
+    showToast('Please fill in all fields and select a rating','error');
+    return;
+  }
+  
+  const newReview = {
+    name: name,
+    rating: reviewRating,
+    text: text,
+    date: new Date().toISOString().split('T')[0]
+  };
+  
+  reviews.unshift(newReview);
+  localStorage.setItem('fluxy-reviews', JSON.stringify(reviews));
+  
+  // Reset form
+  document.getElementById('review-name').value = '';
+  document.getElementById('review-email').value = '';
+  document.getElementById('review-text').value = '';
+  reviewRating = 0;
+  document.querySelectorAll('#star-rating button').forEach(b => b.classList.remove('active'));
+  
+  renderReviews();
+  showToast('Review submitted! Thank you 🙏','success');
+}
+
+// ============ CART FUNCTIONS ============
+function addToCart(pid){
+  const p=products.find(x=>x.id===pid);
+  const size=selectedSizes[pid];
+  if(!size){showToast('Please select a size first','error');return;}
+  const key=`${pid}-${size}`;
+  const existing=cart.find(i=>i.key===key);
+  if(existing){existing.qty++;}
+  else{cart.push({key,pid,name:p.name,color:p.color,size,price:p.price,qty:1});}
+  saveCart();updateCart();
+  const btn=document.getElementById(`add-${pid}`);
+  if(btn){btn.textContent='Added ✓';btn.classList.add('added-flash');
+    setTimeout(()=>{btn.textContent='Add to cart';btn.classList.remove('added-flash');},1200);}
+  showToast(`${p.color} ${p.name} (${size}) added`);
+  
+  // Show social proof
+  setTimeout(() => {
+    const msg = socialProofMessages[Math.floor(Math.random() * socialProofMessages.length)];
+    document.getElementById('social-proof-text').textContent = msg;
+    document.getElementById('social-proof-time').textContent = 'Just now';
+    document.getElementById('social-proof').style.display = 'flex';
+    setTimeout(() => {
+      document.getElementById('social-proof').style.display = 'none';
+    }, 4000);
+  }, 1500);
+}
+
+function saveCart(){
+  localStorage.setItem('fluxy-cart', JSON.stringify(cart));
+  localStorage.setItem('fluxy-coupon', JSON.stringify(appliedCoupon));
+  // Save abandoned cart email
+  const email = document.getElementById('email')?.value;
+  if(email && cart.length > 0) {
+    localStorage.setItem('fluxy-abandoned-cart', JSON.stringify({
+      email: email,
+      cart: cart,
+      date: new Date().toISOString()
+    }));
+  }
+}
+
+function changeQty(key,delta){const item=cart.find(i=>i.key===key);if(!item)return;item.qty+=delta;if(item.qty<=0)cart=cart.filter(i=>i.key!==key);saveCart();updateCart();}
+function removeItem(key){cart=cart.filter(i=>i.key!==key);saveCart();updateCart();}
+
+function applyCoupon(){
+  const code=document.getElementById('coupon-input').value.trim().toUpperCase();
+  if(!code)return showToast('Please enter a coupon code','error');
+  if(code==='ACCRA15'){const region=document.getElementById('region')?.value;if(region&&region!=='Greater Accra'){showToast('ACCRA15 is only valid for Greater Accra','error');return;}}
+  if(coupons[code]){appliedCoupon={code,...coupons[code]};saveCart();updateCart();showToast(`Coupon "${code}" applied — ${coupons[code].description}`);}
+  else{showToast('Invalid coupon code','error');}
+}
+function removeCoupon(){appliedCoupon=null;saveCart();updateCart();showToast('Coupon removed');}
+
+function getDeliveryFee(){
+  const region=document.getElementById('region')?.value;
+  if(!region||deliveryMethod==='pickup')return 0;
+  if(!deliveryFees[region])return 25;
+  return deliveryFees[region][deliveryMethod]||deliveryFees[region].standard;
+}
+
+function getCartTotals(){
+  const subtotal=cart.reduce((a,i)=>a+i.price*i.qty,0);
+  let discount=0;
+  if(appliedCoupon){discount=appliedCoupon.type==='percent'?subtotal*(appliedCoupon.value/100):appliedCoupon.value;}
+  const shipping=getDeliveryFee();
+  const total=Math.max(0,subtotal-discount+shipping);
+  return{subtotal,discount,shipping,total};
+}
+
+function updateCart(){
+  const count=cart.reduce((a,i)=>a+i.qty,0);
+  const countEl=document.getElementById('cart-count');if(countEl)countEl.textContent=count;
+  const itemsEl=document.getElementById('cart-items');
+  const footer=document.getElementById('cart-footer');
+  if(!itemsEl||!footer)return;
+  if(cart.length===0){
+    itemsEl.innerHTML=`<div class="cart-empty"><svg width="40" height="40" fill="none" stroke="#ccc" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Your cart is empty</div>`;
+    footer.style.display='none';return;
+  }
+  itemsEl.innerHTML=cart.map(i=>{
+    const product=products.find(p=>p.id===i.pid);
+    return`<div class="cart-item"><div class="cart-item-img" style="background:${product?.bg||'#eee'}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${product?.fg||'#999'}" stroke-width="1"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div><div class="cart-item-info"><h4>${i.name}</h4><div class="cart-item-meta">${i.color} · Size ${i.size}</div><div class="cart-item-price">₵${(i.price*i.qty).toFixed(2)}</div><div class="qty-row"><button class="qty-btn" onclick="changeQty('${i.key}',-1)">−</button><span class="qty-num">${i.qty}</span><button class="qty-btn" onclick="changeQty('${i.key}',1)">+</button><button class="remove-btn" onclick="removeItem('${i.key}')">Remove</button></div></div></div>`;
+  }).join('');
+  const{subtotal,discount,shipping,total}=getCartTotals();
+  document.getElementById('cart-subtotal').textContent=`₵${subtotal.toFixed(2)}`;
+  document.getElementById('cart-shipping').textContent=shipping===0?'Select at checkout':`₵${shipping.toFixed(2)}`;
+  document.getElementById('cart-total-val').textContent=`₵${total.toFixed(2)}`;
+  const discountRow=document.getElementById('cart-discount-row');
+  const couponMsg=document.getElementById('coupon-message');
+  if(appliedCoupon&&discount>0){discountRow.style.display='flex';document.getElementById('coupon-code-display').textContent=appliedCoupon.code;document.getElementById('cart-discount').textContent=`-₵${discount.toFixed(2)}`;couponMsg.innerHTML=`<div class="coupon-applied">✓ ${appliedCoupon.description} applied <button class="remove-coupon" onclick="removeCoupon()">✕</button></div>`;}
+  else{discountRow.style.display='none';couponMsg.innerHTML='';}
+  footer.style.display='block';
+}
+
+// ============ TRACK ORDER ============
+function trackOrder() {
+  const orderNumber = document.getElementById('track-number').value.trim();
+  const email = document.getElementById('track-email').value.trim();
+  const resultDiv = document.getElementById('track-result');
+  
+  if(!orderNumber || !email) {
+    showToast('Please enter order number and email','error');
+    return;
+  }
+  
+  const orders = JSON.parse(localStorage.getItem('fluxy-orders') || '[]');
+  const order = orders.find(o => o.number === orderNumber && o.shipping.email === email);
+  
+  if(!order) {
+    resultDiv.innerHTML = `
+      <div style="text-align:center;padding:2rem;color:var(--red)">
+        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        <p style="margin-top:1rem">Order not found. Please check your order number and email.</p>
+      </div>`;
+    return;
+  }
+  
+  const orderDate = new Date(order.date);
+  const now = new Date();
+  const daysSinceOrder = Math.floor((now - orderDate) / (1000 * 60 * 60 * 24));
+  
+  let status = 'confirmed';
+  if(daysSinceOrder >= 1) status = 'processing';
+  if(daysSinceOrder >= 2) status = 'shipped';
+  if(daysSinceOrder >= 3 && order.deliveryMethod !== 'pickup') status = 'in_transit';
+  if(daysSinceOrder >= 5 || (order.deliveryMethod === 'express' && daysSinceOrder >= 2)) status = 'delivered';
+  if(order.deliveryMethod === 'pickup' && daysSinceOrder >= 1) status = 'ready_pickup';
+  
+  const statusLabels = {
+    confirmed: 'Order Confirmed',
+    processing: 'Processing',
+    shipped: 'Shipped',
+    in_transit: 'In Transit',
+    delivered: 'Delivered',
+    ready_pickup: 'Ready for Pickup'
+  };
+  
+  const allSteps = order.deliveryMethod === 'pickup' 
+    ? ['confirmed', 'processing', 'ready_pickup']
+    : ['confirmed', 'processing', 'shipped', 'in_transit', 'delivered'];
+  
+  resultDiv.innerHTML = `
+    <div style="background:var(--off);padding:1.5rem;border-radius:8px;margin-bottom:1.5rem">
+      <h3 style="font-weight:700;margin-bottom:.5rem">Order #${order.number}</h3>
+      <p style="font-size:.85rem;color:var(--gray)">Status: <strong style="color:var(--accent)">${statusLabels[status]}</strong></p>
+      <p style="font-size:.8rem;color:var(--gray)">Ordered: ${orderDate.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</p>
+      <p style="font-size:.8rem;color:var(--gray)">Delivery: ${order.deliveryMethod === 'pickup' ? 'Pickup (Osu, Accra)' : order.deliveryMethod === 'express' ? 'Express' : 'Standard'}</p>
+    </div>
+    <div class="track-timeline">
+      ${allSteps.map((step, i) => {
+        const stepIndex = allSteps.indexOf(status);
+        let cls = '';
+        if(i < stepIndex) cls = 'done';
+        if(i === stepIndex) cls = 'active';
+        return `
+        <div class="track-step ${cls}">
+          <h4>${statusLabels[step]}</h4>
+          <p>${step === 'confirmed' ? 'Payment received' : 
+              step === 'processing' ? 'We\'re preparing your order' :
+              step === 'ready_pickup' ? 'Available for pickup at our Osu studio' :
+              step === 'shipped' ? 'Package handed to courier' :
+              step === 'in_transit' ? 'Package on the way to you' :
+              'Package delivered successfully'}</p>
+          ${i <= stepIndex ? `<span class="track-date">${cls === 'done' ? 'Completed' : cls === 'active' ? 'Current' : 'Pending'}</span>` : ''}
+        </div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+// ============ WHATSAPP NOTIFICATION ============
+function sendWhatsAppNotification(order) {
+  const message = encodeURIComponent(
+    `🛍️ *New Order!*\n\n` +
+    `*Order #:* ${order.number}\n` +
+    `*Customer:* ${order.shipping.name}\n` +
+    `*Phone:* ${order.shipping.phone}\n` +
+    `*Amount:* ₵${order.totals.total}\n` +
+    `*Items:* ${order.items.length}\n\n` +
+    `*Delivery:* ${order.deliveryMethod}\n` +
+    `*Region:* ${order.shipping.region}\n\n` +
+    `View details: ${window.location.origin}`
+  );
+  
+  // Open WhatsApp in new tab
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+}
+
+// ============ LOYALTY POINTS ============
+function addLoyaltyPoints(email, amount) {
+  let points = JSON.parse(localStorage.getItem('fluxy-points-' + email) || '0');
+  points += Math.floor(amount);
+  localStorage.setItem('fluxy-points-' + email, JSON.stringify(points));
+  
+  if(points >= 500) {
+    showToast(`🎉 You've earned ${Math.floor(amount)} points! Total: ${points} points. Redeem for discounts!`);
+  }
+}
+
+// ============ FLUXY HOSTED PAYSTACK CHECKOUT ============
+function payWithPaystack(){
+  if(!validateShipping()) return;
+  if(!cart.length){ showToast('Your cart is empty','error'); return; }
+
+  // Keep a local copy of the cart before sending the customer to Paystack.
+  saveCartForLater(document.getElementById('email').value.trim());
+  localStorage.setItem('fluxy-pending-checkout', JSON.stringify({
+    items: cart.map(item => ({id:item.pid||item.id, qty:item.qty, size:item.size})),
+    customerName: `${document.getElementById('firstName').value.trim()} ${document.getElementById('lastName').value.trim()}`.trim(),
+    customerEmail: document.getElementById('email').value.trim(),
+    customerPhone: document.getElementById('phone').value.trim(),
+    totalText: document.getElementById('review-total')?.textContent || '',
+    createdAt: new Date().toISOString()
+  }));
+
+  window.location.href = 'https://paystack.shop/pay/fluxy-payments';
+}
+
+function saveCartForLater(email) {
+  if(cart.length > 0) localStorage.setItem('fluxy-abandoned-cart', JSON.stringify({email,cart,date:new Date().toISOString()}));
+}
+
+function showConfirmation(order){
+  showPage('confirmation');
+  const{subtotal,discount,shipping,total}=order.totals;
+  const invoiceUrl=`/invoice.html?reference=${encodeURIComponent(order.paystackRef)}`;
+  document.getElementById('confirmation-details').innerHTML=`
+    <h3>Order #${order.number}</h3>
+    <div class="conf-row"><span>Status</span><span>✓ Payment Confirmed</span></div>
+    <div class="conf-row"><span>Date</span><span>${new Date(order.date).toLocaleDateString('en-GH',{year:'numeric',month:'long',day:'numeric'})}</span></div>
+    <div class="conf-row"><span>Paystack Ref</span><span>${order.paystackRef}</span></div>
+    <div class="conf-row"><span>Items</span><span>${order.items.reduce((a,i)=>a+i.qty,0)}</span></div>
+    <div class="conf-row"><span>Subtotal</span><span>₵${subtotal.toFixed(2)}</span></div>
+    ${discount>0?`<div class="conf-row" style="color:var(--green)"><span>Discount</span><span>-₵${discount.toFixed(2)}</span></div>`:''}
+    <div class="conf-row"><span>Delivery</span><span>${shipping===0?'FREE':'₵'+shipping.toFixed(2)}</span></div>
+    <div class="conf-row"><strong>Total</strong><strong>₵${total.toFixed(2)}</strong></div>
+    <hr style="margin:1rem 0;border-color:var(--border)">
+    <div class="conf-row"><span>Delivery to</span><span>${order.shipping.name}</span></div>
+    <div class="conf-row"><span>Region</span><span>${order.shipping.region}</span></div>
+    <div class="conf-row"><span>Payment</span><span>${(order.momoProvider||'Paystack').toUpperCase()} via Paystack</span></div>
+    <p style="font-size:.8rem;color:var(--gray);text-align:center;margin-top:1rem">Your official invoice is ready.</p>
+    <a class="btn btn-dark" style="display:block;text-align:center;margin-top:1rem" href="${invoiceUrl}" target="_blank" rel="noopener">Download Invoice (PDF)</a>
+  `;
+  document.getElementById('track-number').value=order.number;
+  document.getElementById('track-email').value=order.shipping.email;
+  showToast(`Order #${order.number} confirmed! Payment received.`,'success');
+}
+
+// Paystack returns to /payment-callback; the server verifies payment before this page loads.
+(async function handleVerifiedPaymentReturn(){
+  const params=new URLSearchParams(window.location.search);
+  if(params.get('payment')!=='success') return;
+  const reference=params.get('reference');
+  if(!reference) return;
+  try{
+    const response=await fetch(`/api/orders/by-reference/${encodeURIComponent(reference)}`);
+    const result=await response.json();
+    if(!response.ok || !result.order) throw new Error(result.error||'We could not retrieve your verified order.');
+    const order=result.order;
+    const orders=JSON.parse(localStorage.getItem('fluxy-orders')||'[]');
+    if(!orders.some(o=>o.paystackRef===order.paystackRef)) orders.unshift(order);
+    localStorage.setItem('fluxy-orders',JSON.stringify(orders));
+    if(order.shipping?.email) addLoyaltyPoints(order.shipping.email,order.totals.total);
+    showConfirmation(order);
+    cart=[]; appliedCoupon=null; saveCart(); updateCart();
+    history.replaceState({},document.title,window.location.pathname);
+  }catch(error){showToast(error.message,'error');}
+})();
+
+// ============ DELIVERY FUNCTIONS ============
+function selectMomoProvider(el,provider){document.querySelectorAll('.momo-provider').forEach(m=>m.classList.remove('selected'));el.classList.add('selected');momoProvider=provider;}
+function selectDelivery(el,method){document.querySelectorAll('.delivery-option').forEach(d=>d.classList.remove('selected'));el.classList.add('selected');deliveryMethod=method;updateDeliveryFee();updateReview();}
+function updateDeliveryFee(){
+  const region=document.getElementById('region')?.value;if(!region)return;
+  const fees=deliveryFees[region]||{standard:25,express:null};
+  document.getElementById('standard-price').textContent=`₵${fees.standard}`;
+  const expressEl=document.getElementById('express-price').parentElement;
+  if(fees.express===null){document.getElementById('express-price').textContent='N/A';expressEl.style.opacity='0.5';expressEl.style.pointerEvents='none';if(deliveryMethod==='express'){deliveryMethod='standard';document.querySelectorAll('.delivery-option').forEach(d=>d.classList.remove('selected'));document.querySelector('.delivery-option').classList.add('selected');}}
+  else{document.getElementById('express-price').textContent=`₵${fees.express}`;expressEl.style.opacity='1';expressEl.style.pointerEvents='all';}
+}
+
+// ============ CHECKOUT FUNCTIONS ============
+function goToCheckout(){if(cart.length===0){showToast('Your cart is empty','error');return;}toggleCart();showPage('checkout');currentStep=1;updateCheckoutSteps();document.getElementById('checkout-step-1').classList.add('active');document.getElementById('checkout-step-2').classList.remove('active');document.getElementById('checkout-step-3').classList.remove('active');updateDeliveryFee();}
+function goToStep(step){if(step>currentStep&&currentStep===1&&!validateShipping())return;currentStep=step;updateCheckoutSteps();document.querySelectorAll('.checkout-section').forEach(s=>s.classList.remove('active'));document.getElementById(`checkout-step-${step}`).classList.add('active');if(step===3)updateReview();document.querySelector('.checkout-container').scrollIntoView({behavior:'smooth'});}
+function updateCheckoutSteps(){for(let i=1;i<=3;i++){const stepEl=document.getElementById(`step-indicator-${i}`);stepEl.classList.remove('active','completed');if(i===currentStep)stepEl.classList.add('active');if(i<currentStep)stepEl.classList.add('completed');}}
+
+function validateShipping(){
+  let valid=true;
+  ['firstName','lastName','email','phone','region','city','address'].forEach(id=>{const el=document.getElementById(id);const group=el.closest('.form-group');group.classList.remove('error');if(!el.value.trim()){group.classList.add('error');valid=false;}});
+  const phone=document.getElementById('phone').value.replace(/\s/g,'');
+  if(phone&&!/^(\+233|0)[245]\d{8}$/.test(phone)){document.getElementById('phone').closest('.form-group').classList.add('error');showToast('Please enter a valid Ghana phone number','error');valid=false;}
+  const email=document.getElementById('email');
+  if(email.value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)){email.closest('.form-group').classList.add('error');valid=false;}
+  if(!valid)showToast('Please fill in all required fields correctly','error');
+  return valid;
+}
+
+function updateReview(){
+  const{subtotal,discount,shipping,total}=getCartTotals();
+  document.getElementById('review-items').innerHTML=cart.map(i=>`<div class="summary-item"><div><div class="summary-item-name">${i.name} (${i.color})</div><div class="summary-item-detail">Size: ${i.size} × ${i.qty}</div></div><span>₵${(i.price*i.qty).toFixed(2)}</span></div>`).join('');
+  document.getElementById('review-subtotal').textContent=`₵${subtotal.toFixed(2)}`;
+  document.getElementById('review-shipping').textContent=shipping===0?'FREE':`₵${shipping.toFixed(2)}`;
+  const discountRow=document.getElementById('review-discount-row');
+  if(discount>0){discountRow.style.display='flex';document.getElementById('review-discount').textContent=`-₵${discount.toFixed(2)}`;}else{discountRow.style.display='none';}
+  document.getElementById('review-total').textContent=`₵${total.toFixed(2)}`;
+  document.getElementById('review-address').innerHTML=`${document.getElementById('firstName').value} ${document.getElementById('lastName').value}<br>${document.getElementById('phone').value}<br>${document.getElementById('address').value}<br>${document.getElementById('city').value}, ${document.getElementById('district').value||''}<br>${document.getElementById('region').value} Region${document.getElementById('gps').value?'<br>GPS: '+document.getElementById('gps').value:''}<br>Delivery: ${deliveryMethod==='pickup'?'Pickup (Osu, Accra)':deliveryMethod==='express'?'Express (1-2 days)':'Standard (3-5 days)'}`;
+}
+
+// ============ EMAIL FUNCTIONS ============
+function sendOrderEmail(order){
+  const{subtotal,discount,shipping,total}=order.totals;
+  const itemsList=order.items.map(i=>`${i.name} - ${i.color} - Size: ${i.size} - Qty: ${i.qty} - ₵${(i.price*i.qty).toFixed(2)}`).join('\n');
+  const templateParams={
+    to_email:order.shipping.email,to_name:order.shipping.name,customer_email:order.shipping.email,
+    order_number:order.number,order_date:new Date(order.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}),
+    order_items:itemsList,order_subtotal:`₵${subtotal.toFixed(2)}`,order_discount:discount>0?`-₵${discount.toFixed(2)}`:'₵0.00',
+    order_shipping:shipping===0?'FREE':`₵${shipping.toFixed(2)}`,order_total:`₵${total.toFixed(2)}`,
+    shipping_name:order.shipping.name,shipping_address:order.shipping.address,shipping_city:order.shipping.city,
+    shipping_state:order.shipping.region,shipping_zip:order.shipping.gps||'',shipping_country:'Ghana',shipping_phone:order.shipping.phone,
+    payment_method:`Mobile Money (${order.momoProvider.toUpperCase()}) via Paystack`,payment_status:order.paymentStatus,
+    paystack_ref:order.paystackRef,delivery_method:order.deliveryMethod,coupon_code:order.coupon?order.coupon.code:'None',
+    admin_email:'officialfluxy149@gmail.com',
+  };
+  emailjs.send('SERVICE_OFFICIALFLUXY149','TEMPLATE_84X0OBG',templateParams).then(r=>console.log('Customer email sent!')).catch(e=>console.error('Failed:',e));
+  emailjs.send('SERVICE_OFFICIALFLUXY149','YOUR_ADMIN_TEMPLATE_ID',{...templateParams,to_email:'officialfluxy149@gmail.com'}).then(r=>console.log('Admin notified!')).catch(e=>console.error('Failed:',e));
+}
+
+// ============ CONTACT FORM ============
+function handleContactSubmit(event){
+  event.preventDefault();
+  const btn=document.getElementById('contact-submit-btn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Sending...';
+  const formData={
+    contact_name:event.target.contact_name.value,contact_email:event.target.contact_email.value,
+    contact_phone:event.target.contact_phone?.value||'Not provided',contact_subject:event.target.contact_subject.value,
+    contact_message:event.target.contact_message.value,admin_email:'officialfluxy149@gmail.com',to_email:'officialfluxy149@gmail.com',
+  };
+  emailjs.send('SERVICE_OFFICIALFLUXY149','TEMPLATE_ATUOF4P',formData).then(r=>{showToast('Message sent!','success');event.target.reset();btn.disabled=false;btn.textContent='Send message';}).catch(e=>{showToast('Failed to send.','error');btn.disabled=false;btn.textContent='Send message';});
+}
+
+function showConfirmation(order){
+  showPage('confirmation');
+  const{subtotal,discount,shipping,total}=order.totals;
+  document.getElementById('confirmation-details').innerHTML=`
+    <h3>Order #${order.number}</h3>
+    <div class="conf-row"><span>Status</span><span>✅ Payment Confirmed</span></div>
+    <div class="conf-row"><span>Date</span><span>${new Date(order.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</span></div>
+    <div class="conf-row"><span>Paystack Ref</span><span>${order.paystackRef}</span></div>
+    <div class="conf-row"><span>Items</span><span>${order.items.reduce((a,i)=>a+i.qty,0)}</span></div>
+    <div class="conf-row"><span>Subtotal</span><span>₵${subtotal.toFixed(2)}</span></div>
+    ${discount>0?`<div class="conf-row" style="color:var(--green)"><span>Discount</span><span>-₵${discount.toFixed(2)}</span></div>`:''}
+    <div class="conf-row"><span>Delivery</span><span>${shipping===0?'FREE':'₵'+shipping.toFixed(2)}</span></div>
+    <div class="conf-row"><strong>Total</strong><strong>₵${total.toFixed(2)}</strong></div>
+    <hr style="margin:1rem 0;border-color:var(--border)">
+    <div class="conf-row"><span>Delivery to</span><span>${order.shipping.name}</span></div>
+    <div class="conf-row"><span>Region</span><span>${order.shipping.region}</span></div>
+    <div class="conf-row"><span>Payment</span><span>MoMo (${order.momoProvider.toUpperCase()}) via Paystack</span></div>
+    <hr style="margin:1rem 0;border-color:var(--border)">
+    <p style="font-size:.8rem;color:var(--gray);text-align:center">Track your order anytime with your order number: <strong>${order.number}</strong></p>
+  `;
+  
+  // Set track form values
+  document.getElementById('track-number').value = order.number;
+  document.getElementById('track-email').value = order.shipping.email;
+  
+  showToast(`Order #${order.number} confirmed! Payment received.`,'success');
+}
+
+// ============ SUBSCRIBE ============
+function handleSubscribe() {
+  const email = document.getElementById('subscribe-email')?.value.trim();
+  if(email && email.includes('@')) {
+    showToast('You\'re in! Check your inbox. 📧','success');
+    document.getElementById('subscribe-email').value = '';
+  } else {
+    showToast('Please enter a valid email','error');
+  }
+}
+
+// ============ NAVIGATION ============
+function toggleCart(){document.getElementById('cart-sidebar').classList.toggle('open');document.getElementById('cart-overlay').classList.toggle('open');document.getElementById('coupon-input').value='';updateCart();}
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const page=document.getElementById(`page-${id}`);
+  if(page)page.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  
+  if(id==='checkout'){currentStep=1;updateCheckoutSteps();document.querySelectorAll('.checkout-section').forEach(s=>s.classList.remove('active'));document.getElementById('checkout-step-1').classList.add('active');updateDeliveryFee();}
+  if(id==='wishlist'){updateWishlistUI();}
+}
+
+// ============ TOAST ============
+let toastTimer;
+function showToast(msg,type=''){const t=document.getElementById('toast');t.textContent=msg;t.className='toast';if(type)t.classList.add(type);t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2800);}
+
+// ============ INIT ============
+renderProducts();
+renderReviews();
+updateCart();
+updateWishlistUI();
+startFlashSale();
+showSocialProof();
+
+// Check for abandoned cart
+const abandonedCart = JSON.parse(localStorage.getItem('fluxy-abandoned-cart') || 'null');
+if(abandonedCart && abandonedCart.cart && abandonedCart.cart.length > 0) {
+  const hoursSinceAbandoned = (new Date() - new Date(abandonedCart.date)) / (1000 * 60 * 60);
+  if(hoursSinceAbandoned > 1 && hoursSinceAbandoned < 48) {
+    // Optionally restore cart or show reminder
+    console.log('Abandoned cart detected for:', abandonedCart.email);
+  }
+}
+</script>
+</body>
+</html>
