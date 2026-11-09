@@ -14,7 +14,7 @@
 4. Copy `.env.example` to `.env`.
 5. In `.env`, replace the example with your Paystack **test secret key** (`sk_test_...`). Never put this key in `index.html`, GitHub, or any frontend file.
 6. Run `npm run dev` (or `npm start`).
-7. Open `http://localhost:3000`. Do not open `index.html` directly with `file://`; the API must be served from the same origin.
+7. Open `http://localhost:<PORT>` (the port set in your `.env`, or the server default). Do not open `index.html` directly with `file://`; the API must be served from the same origin.
 
 ## Important configuration
 - The browser currently has a Paystack **public test key** in `public/index.html`. Keep the public key there; it is designed to be public. Replace it with your live public key only when you are ready for production.
