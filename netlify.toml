@@ -1,0 +1,5 @@
+[build.environment]
+  # PORT and DB_PATH are plain configuration, not secrets. Their values (a local port
+  # number and a file name) legitimately appear in code and docs, so skip them in
+  # secrets scanning. PAYSTACK_SECRET_KEY is still scanned.
+  SECRETS_SCAN_OMIT_KEYS = "PORT,DB_PATH"
