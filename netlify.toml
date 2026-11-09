@@ -1,0 +1,9 @@
+[build]
+  # Static site: there is no package.json, so skip the dashboard's `npm install`.
+  command = "echo 'Static site - no build step'"
+  publish = "."
+
+[build.environment]
+  # PORT and DB_PATH are plain config values, not secrets. Real secrets
+  # (e.g. PAYSTACK_SECRET_KEY) are still scanned.
+  SECRETS_SCAN_OMIT_KEYS = "PORT,DB_PATH"
